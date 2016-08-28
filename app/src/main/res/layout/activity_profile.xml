@@ -1,35 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme.NoActionBar.Transparent"
     tools:context="com.example.rostykboiko.todoapp.ProfileActivity">
 
-    <include layout="@layout/toolbar"
-        />
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:theme="@style/AppTheme.PopupOverlay"
+        android:background="@color/background"
+        android:id="@+id/appbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/collapsing_toolbar"
+            android:fitsSystemWindows="true"
+            app:titleEnabled="true"
+            >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:foregroundGravity="center"
-        android:layout_marginTop="70dp"
-        android:layout_marginStart="16dp"
-        />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:id="@+id/imageView"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingLeft="16dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/userName"
-        android:layout_below="@id/imageView"
-        android:gravity="start"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="16dp" />
+                android:foregroundGravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="0dp"
+                android:scaleType="fitStart" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="180dp"
+                android:layout_marginStart="32dp"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:id="@+id/userName"
+                android:textColor="@color/white"
+                android:gravity="start"
+                android:layout_marginTop="16dp" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:titleTextColor="@color/white"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
+
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,8 +67,8 @@
         android:text="Medium Text"
         android:paddingLeft="16dp"
         android:id="@+id/userEmail"
-        android:layout_below="@+id/userName"
-        android:layout_alignStart="@+id/userName" />
+        android:layout_below="@+id/appbar"
+        android:layout_alignStart="@+id/appbar" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,6 +86,7 @@
         android:id="@+id/photoUri"
         android:layout_below="@+id/userID"
         android:layout_alignStart="@+id/userID" />
+
 
 
 </RelativeLayout>

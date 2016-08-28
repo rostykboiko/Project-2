@@ -8,7 +8,7 @@
     </style>
 
 
-    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+    <style name="AppTheme.NoActionBar.Transparent" parent="AppTheme">
         <item name="colorPrimary">@android:color/transparent</item>
     </style>
 </resources>

@@ -82,7 +82,7 @@ public class EditorActivity extends AppCompatActivity {
                 rs.moveToFirst();
                 name.setText(rs.getString(rs.getColumnIndex(CalendarDB.name)));
                 content.setText(rs.getString(rs.getColumnIndex(CalendarDB.description)));
-                eventTimeStartTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dtstart)));
+                eventTimeStartTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dataStart)));
                 eventTimeEndTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dtend)));
                 if (!rs.isClosed()) {
                     rs.close();
@@ -233,9 +233,9 @@ public class EditorActivity extends AppCompatActivity {
                 d.setTitle("Are you sure");
                 d.show();
                 return true;
-            //  Переписати збереження
-            //  з пустими полями
-            //  Увесь день(дія) - з датою тільки початку
+            // TODO Переписати збереження
+            // TODO з пустими полями
+            // TODO Увесь день(дія) - з датою тільки початку
             case R.id.Save:
                 Bundle extras = getIntent().getExtras();
                 timeStringStart = eventTimeStartTxt.getText().toString();

@@ -39,4 +39,5 @@ public class DateAdapter {
         return dayOfWeekTitle;
     }
 
+
 }

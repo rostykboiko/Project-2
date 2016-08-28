@@ -119,9 +119,15 @@ public class MainActivity extends AppCompatActivity implements
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
 
-        signIn();
+
+
+
         initNavDrawer();
         initCoordinationLayout();
+    }
+
+    private void googleSignIn(){
+
     }
 
     @Override
@@ -182,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void signIn() {
+        googleSignIn();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -411,8 +418,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void initCoordinationLayout() {
-        //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-
         FloatingActionButton btnadd = (FloatingActionButton) findViewById(R.id.btnadd);
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -433,7 +438,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
         String[] fieldNames = new String[]{CalendarDB.name, CalendarDB._id,
-                CalendarDB.dtstart, CalendarDB.description};
+                CalendarDB.dataStart, CalendarDB.description};
 
         int[] display = new int[]{R.id.txtNameRow, R.id.txtIDrow,
                 R.id.txtTimeRow, R.id.txtDescription};

@@ -378,8 +378,8 @@ public class CalendarActivity extends Activity
 
                 mydb.insertNotes(
                         event.getSummary(),
-                        event.getStart().toString(),
-                        event.getEnd().toString(),
+                        event.getStart().getDateTime().toString(),
+                        event.getEnd().getDateTime().toString(),
                         event.getDescription(),
                         "");
 

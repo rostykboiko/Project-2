@@ -28,8 +28,6 @@ public class SettingsActivity extends AppCompatActivity {
         list_settings = (ListView)findViewById(R.id.list_settings);
         setSupportActionBar(toolbar);
 
-
-
     }
 
 
