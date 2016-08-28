@@ -4,9 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.provider.CalendarContract;
-import android.support.design.widget.Snackbar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -30,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class EditorActivity extends AppCompatActivity {
     private CalendarDB mydb;
     private EditText name;
@@ -39,23 +35,9 @@ public class EditorActivity extends AppCompatActivity {
     private TextView eventTimeEndTxt;
     private TextView eventDateStartTxt;
     private TextView eventDateEndTxt;
-    private ImageView backButton;
     private Calendar mcurrentDate;
-    private String timeStringStart;
-    private String timeStringEnd;
 
-    Bundle extras;
-    Snackbar snackbar;
-    private String date;
-    private long dtstart;//
-    private long dtend;
     private int id_To_Update = 0;
-
-
-    private Toast toast;
-
-    private static final Uri EVENT_URI = CalendarContract.Events.CONTENT_URI;
-    private static final Uri CAL_URI = CalendarContract.Calendars.CONTENT_URI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +54,7 @@ public class EditorActivity extends AppCompatActivity {
         eventTimeEndTxt = (TextView) findViewById(R.id.txtTimeEnd);
         eventDateStartTxt = (TextView) findViewById(R.id.txtDateStart);
         eventDateEndTxt = (TextView) findViewById(R.id.txtDateEnd);
-        backButton = (ImageView) findViewById(R.id.backBtn);
+        ImageView backButton = (ImageView) findViewById(R.id.backBtn);
 
         mcurrentDate = Calendar.getInstance();
         eventDateStartTxt.setOnClickListener(Global_OnClickListener);
@@ -214,7 +196,6 @@ public class EditorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            int Value = extras.getInt("id");
             getMenuInflater().inflate(R.menu.display_menu, menu);
         }
         return true;
@@ -222,6 +203,10 @@ public class EditorActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+        String timeStringStart;
+        String timeStringEnd;
+        Toast toast;
+
         switch (item.getItemId()) {
             case R.id.Delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme_Dialog));
