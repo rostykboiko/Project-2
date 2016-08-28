@@ -1,4 +1,4 @@
-package com.example.rostykboiko.todoapp.database;
+package com.example.rostykboiko.todoapp.adapter;
 
 import android.graphics.Bitmap;
 

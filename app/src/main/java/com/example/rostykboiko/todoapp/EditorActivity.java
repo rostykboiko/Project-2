@@ -2,9 +2,7 @@ package com.example.rostykboiko.todoapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Context;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CalendarContract;
@@ -19,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,20 +24,21 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.rostykboiko.todoapp.adapter.DateAdapter;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static android.provider.ContactsContract.Directory.ACCOUNT_NAME;
 
 public class EditorActivity extends AppCompatActivity {
     private CalendarDB mydb;
     private EditText name;
     private EditText content;
-    private TextView eventTimeStart;
-    private TextView eventTimeEnd;
-    private TextView eventDateStart;
-    private TextView eventDateEnd;
+    private TextView eventTimeStartTxt;
+    private TextView eventTimeEndTxt;
+    private TextView eventDateStartTxt;
+    private TextView eventDateEndTxt;
     private ImageView backButton;
     private Calendar mcurrentDate;
     private String timeStringStart;
@@ -70,17 +68,17 @@ public class EditorActivity extends AppCompatActivity {
 
         name = (EditText) findViewById(R.id.txtname);
         content = (EditText)findViewById(R.id.txtDescription);
-        eventTimeStart = (TextView) findViewById(R.id.txtTimeStart);
-        eventTimeEnd = (TextView) findViewById(R.id.txtTimeEnd);
-        eventDateStart = (TextView) findViewById(R.id.txtDateStart);
-        eventDateEnd = (TextView) findViewById(R.id.txtDateEnd);
+        eventTimeStartTxt = (TextView) findViewById(R.id.txtTimeStart);
+        eventTimeEndTxt = (TextView) findViewById(R.id.txtTimeEnd);
+        eventDateStartTxt = (TextView) findViewById(R.id.txtDateStart);
+        eventDateEndTxt = (TextView) findViewById(R.id.txtDateEnd);
         backButton = (ImageView) findViewById(R.id.backBtn);
 
         mcurrentDate = Calendar.getInstance();
-        eventDateStart.setOnClickListener(Global_OnClickListener);
-        eventTimeStart.setOnClickListener(Global_OnClickListener);
-        eventTimeEnd.setOnClickListener(Global_OnClickListener);
-        eventDateEnd.setOnClickListener(Global_OnClickListener);
+        eventDateStartTxt.setOnClickListener(Global_OnClickListener);
+        eventTimeStartTxt.setOnClickListener(Global_OnClickListener);
+        eventTimeEndTxt.setOnClickListener(Global_OnClickListener);
+        eventDateEndTxt.setOnClickListener(Global_OnClickListener);
         backButton.setOnClickListener(Global_OnClickListener);
 
         name.setSelectAllOnFocus(true);
@@ -102,8 +100,8 @@ public class EditorActivity extends AppCompatActivity {
                 rs.moveToFirst();
                 name.setText(rs.getString(rs.getColumnIndex(CalendarDB.name)));
                 content.setText(rs.getString(rs.getColumnIndex(CalendarDB.description)));
-                eventTimeStart.setText(rs.getString(rs.getColumnIndex(CalendarDB.dtstart)));
-                eventTimeEnd.setText(rs.getString(rs.getColumnIndex(CalendarDB.dtend)));
+                eventTimeStartTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dtstart)));
+                eventTimeEndTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dtend)));
                 if (!rs.isClosed()) {
                     rs.close();
                 }
@@ -111,57 +109,29 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
-    private String monthOfYear(int month){
-        String monthOfYear = "";
-        if (month + 1 == 1) monthOfYear = getString(R.string.January);
-        if (month + 1 == 2) monthOfYear = getString(R.string.February);
-        if (month + 1 == 3) monthOfYear = getString(R.string.March);
-        if (month + 1 == 4) monthOfYear = getString(R.string.April);
-        if (month + 1 == 5) monthOfYear = getString(R.string.May);
-        if (month + 1 == 6) monthOfYear = getString(R.string.June);
-        if (month + 1 == 7) monthOfYear = getString(R.string.July);
-        if (month + 1 == 8) monthOfYear = getString(R.string.August);
-        if (month + 1 == 9) monthOfYear = getString(R.string.September);
-        if (month + 1 == 10) monthOfYear = getString(R.string.October);
-        if (month + 1 == 11) monthOfYear = getString(R.string.November);
-        if (month + 1 == 12) monthOfYear = getString(R.string.December);
-
-        return monthOfYear;
-    }
-
-    private void dateInit(int day,int dayOfWeek,int month, int year){
+    private void dateInit(int day,int dayOfWeek, int month, int year){
         // DateFormat : Ср,10 серпень 2016
-        String dayWeek = null;
-        String monthOfYear = null;
-
-        if(dayOfWeek == 1) dayWeek = getString(R.string.sun);
-        if(dayOfWeek == 2) dayWeek = getString(R.string.mon);
-        if(dayOfWeek == 3) dayWeek = getString(R.string.tue);
-        if(dayOfWeek == 4) dayWeek = getString(R.string.wed);
-        if(dayOfWeek == 5) dayWeek = getString(R.string.thu);
-        if(dayOfWeek == 6) dayWeek = getString(R.string.fri);
-        if(dayOfWeek == 7) dayWeek = getString(R.string.sat);
-
-
-
-        eventDateStart.setText(dayWeek + "," + day + " " + monthOfYear + " " + year);
-        eventDateEnd.setText(dayWeek + "," + day + " " + monthOfYear + " " + year);
+       // DateAdapter.dayOfWeekString(this, dayOfWeek);
+        eventDateStartTxt.setText(DateAdapter.dayOfWeekString(this, dayOfWeek) + "," + day + " " + DateAdapter.monthOfYear(this, month) + " " + year);
+        eventDateEndTxt.setText(DateAdapter.dayOfWeekString(this, dayOfWeek) + "," + day + " " + DateAdapter.monthOfYear(this, month) + " " + year);
 
         if (mcurrentDate.get(Calendar.HOUR_OF_DAY)<12){
-            eventTimeStart.setText("14:00");
-            eventTimeEnd.setText("15:00");
+            eventTimeStartTxt.setText("14:00");
+            eventTimeEndTxt.setText("15:00");
         } else if(mcurrentDate.get(Calendar.HOUR_OF_DAY)<17){
-            eventTimeStart.setText("18:00");
-            eventTimeEnd.setText("19:00");
+            eventTimeStartTxt.setText("18:00");
+            eventTimeEndTxt.setText("19:00");
         } else {
-            eventTimeStart.setText("10:00");
-            eventTimeEnd.setText("11:00");
+            eventTimeStartTxt.setText("10:00");
+            eventTimeEndTxt.setText("11:00");
         }
 
     }
 
     private final View.OnClickListener Global_OnClickListener = new View.OnClickListener() {
         public void onClick(final View v) {
+            final SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
+
             int hour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
             int minute = mcurrentDate.get(Calendar.MINUTE);
             int year = mcurrentDate.get(Calendar.YEAR);
@@ -176,12 +146,12 @@ public class EditorActivity extends AppCompatActivity {
                     mDatePicker = new DatePickerDialog(EditorActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                            SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
+
                             Date date = new Date(year, month, day-1);
                             String dayOfWeek = simpledateformat.format(date);
 
-                            eventDateStart.setText(dayOfWeek + " " + day + ", " +  monthOfYear(month) + " " + year);
-                            eventDateEnd.setText(dayOfWeek + " " + day + ", " +  monthOfYear(month) + " " + year);
+                            eventDateStartTxt.setText(dayOfWeek + " " + day + ", " + DateAdapter.monthOfYear(EditorActivity.this, month) + " " + year);
+                            eventDateEndTxt.setText(dayOfWeek + " " + day + ", " +  DateAdapter.monthOfYear(EditorActivity.this, month) + " " + year);
                         }
                     }, year, month, day);
                     mDatePicker.show();
@@ -191,12 +161,12 @@ public class EditorActivity extends AppCompatActivity {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                             if(selectedMinute < 10 ){
-                                eventTimeStart.setText( selectedHour + ":0" + selectedMinute);
-                                eventTimeEnd.setText(( selectedHour + 1 + ":0" + selectedMinute));
+                                eventTimeStartTxt.setText( selectedHour + ":0" + selectedMinute);
+                                eventTimeEndTxt.setText(( selectedHour + 1 + ":0" + selectedMinute));
                             }
                             else{
-                                eventTimeStart.setText( selectedHour + ":" + selectedMinute);
-                                eventTimeEnd.setText(( selectedHour + 1 + ":" + selectedMinute));
+                                eventTimeStartTxt.setText( selectedHour + ":" + selectedMinute);
+                                eventTimeEndTxt.setText(( selectedHour + 1 + ":" + selectedMinute));
                             }
                         }
                     }, hour, minute, true);//Yes 24 hour time
@@ -212,7 +182,7 @@ public class EditorActivity extends AppCompatActivity {
                             Date date = new Date(year, month, day-1);
                             String dayOfWeek = simpledateformat.format(date);
 
-                            eventDateEnd.setText(dayOfWeek + " " + day + ", " +  monthOfYear(month) + " " + year);
+                            eventDateEndTxt.setText(dayOfWeek + " " + day + ", " +  DateAdapter.monthOfYear(EditorActivity.this, month) + " " + year);
                         }
                     }, year, month, day);
                     mDatePicker.show();
@@ -222,10 +192,10 @@ public class EditorActivity extends AppCompatActivity {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                             if(selectedMinute < 10 ){
-                                eventTimeEnd.setText(( selectedHour + ":0" + selectedMinute));
+                                eventTimeEndTxt.setText(( selectedHour + ":0" + selectedMinute));
                             }
                             else{
-                                eventTimeEnd.setText(( selectedHour + ":" + selectedMinute));
+                                eventTimeEndTxt.setText(( selectedHour + ":" + selectedMinute));
                             }
                         }
                     }, hour, minute, true);//Yes 24 hour time
@@ -283,8 +253,8 @@ public class EditorActivity extends AppCompatActivity {
             //  Увесь день(дія) - з датою тільки початку
             case R.id.Save:
                 Bundle extras = getIntent().getExtras();
-                timeStringStart = eventTimeStart.getText().toString();
-                timeStringEnd = eventTimeEnd.getText().toString();
+                timeStringStart = eventTimeStartTxt.getText().toString();
+                timeStringEnd = eventTimeEndTxt.getText().toString();
                 if (extras != null) {
                     int Value = extras.getInt("id");
                     if (Value > 0) {
@@ -294,7 +264,7 @@ public class EditorActivity extends AppCompatActivity {
                             toast.show();
                         } else {
                             if (mydb.updateNotes(id_To_Update, name.getText().toString(),
-                                    timeStringStart, timeStringEnd, content.getText().toString()))
+                                    timeStringStart, timeStringEnd, content.getText().toString(), ""))
                             {
                                 toast = Toast.makeText(getApplicationContext(), "Your note Updated Successfully!", Toast.LENGTH_LONG);
                                 toast.show();
@@ -311,7 +281,7 @@ public class EditorActivity extends AppCompatActivity {
                             toast.show();
                         } else {
                             if (mydb.insertNotes(name.getText().toString(),timeStringStart, timeStringEnd,
-                                    content.getText().toString())) {
+                                    content.getText().toString(), "")) {
                                 toast = Toast.makeText(getApplicationContext(), "Added Successfully.", Toast.LENGTH_LONG);
                                 toast.show();
                                 Intent intent = new Intent(this, MainActivity.class);

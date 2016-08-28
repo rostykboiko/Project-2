@@ -12,6 +12,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
 
+import com.google.api.client.util.Strings;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.client.util.DateTime;
 
@@ -374,11 +375,13 @@ public class CalendarActivity extends Activity
                     // the start date.
                     start = event.getStart().getDate();
                 }
+
                 mydb.insertNotes(
                         event.getSummary(),
                         event.getStart().toString(),
                         event.getEnd().toString(),
-                        event.getDescription());
+                        event.getDescription(),
+                        "");
 
                 eventStrings.add(String.format("%s", event.getEnd().toString()));
 

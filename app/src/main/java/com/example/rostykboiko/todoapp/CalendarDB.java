@@ -37,8 +37,8 @@ class CalendarDB extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL("create table" + mycalendar
-                + "(_id integer primary key, dtstart text, dtend text, name text, description text)");
+        db.execSQL("create table " + mycalendar
+                + "(_id integer primary key, dtstart text, dtend text, name text, description text, attachment text)");
 
     }
 
@@ -51,20 +51,22 @@ class CalendarDB extends SQLiteOpenHelper {
 
     Cursor fetchAll() {
         db = this.getReadableDatabase();
-        Cursor mCursor = db.query(mycalendar, new String[] { "_id", "dtstart", "dtend","name", "description" }
+        Cursor mCursor = db.query(mycalendar, new String[]
+                { "_id", "dtstart", "dtend", "name", "description", "attachment" }
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor;
     }
-    boolean insertNotes(String name, String dtstart, String dtend, String description) {
+    boolean insertNotes(String name, String dtstart, String dtend, String description, String attachment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("dtstart", dtstart);
         contentValues.put("dtend", dtend);
         contentValues.put("description", description);
+        contentValues.put("attachment", attachment);
         db.insert(mycalendar, null, contentValues);
         return true;
     }
@@ -80,13 +82,14 @@ class CalendarDB extends SQLiteOpenHelper {
         int numRows = (int) DatabaseUtils.queryNumEntries(db, mycalendar);
         return numRows;
     }
-    boolean updateNotes(Integer id, String name, String dtstart, String dtend, String description) {
+    boolean updateNotes(Integer id, String name, String dtstart, String dtend, String description, String attachment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("dtstart", dtstart);
         contentValues.put("dtend", dtend);
         contentValues.put("description", description);
+        contentValues.put("attachment", attachment);
         db.update(mycalendar, contentValues, "_id = ? ",
                 new String[] { Integer.toString(id) });
         return true;
@@ -108,6 +111,7 @@ class CalendarDB extends SQLiteOpenHelper {
             array_list.add(res.getString(res.getColumnIndex(dtstart)));
             array_list.add(res.getString(res.getColumnIndex(dtend)));
             array_list.add(res.getString(res.getColumnIndex(description)));
+            array_list.add(res.getString(res.getColumnIndex(attachment)));
 
             res.moveToNext();
         }

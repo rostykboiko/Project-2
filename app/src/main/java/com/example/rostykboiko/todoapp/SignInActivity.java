@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.Printer;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.rostykboiko.todoapp.MainActivity;
-import com.example.rostykboiko.todoapp.R;
-import com.example.rostykboiko.todoapp.database.GoogleAuth;
+import com.example.rostykboiko.todoapp.adapter.GoogleAuth;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;

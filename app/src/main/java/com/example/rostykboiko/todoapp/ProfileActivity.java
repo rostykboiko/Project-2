@@ -1,13 +1,12 @@
 package com.example.rostykboiko.todoapp;
 
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.rostykboiko.todoapp.database.GoogleAuth;
+import com.example.rostykboiko.todoapp.adapter.GoogleAuth;
 import com.example.rostykboiko.todoapp.Tasks.DownloadImageTask;
 
 public class ProfileActivity extends AppCompatActivity {
