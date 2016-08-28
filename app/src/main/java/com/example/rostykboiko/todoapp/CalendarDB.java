@@ -16,7 +16,7 @@ class CalendarDB extends SQLiteOpenHelper {
     private SQLiteDatabase db;
     public HashMap hp;
 
-//    private static SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DDTHH:MM:SS.SSS");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sss'Z'");
 
     private static final String mycalendar = "mycalendar";
     private static final String dbname = "cal1.db";
@@ -24,12 +24,10 @@ class CalendarDB extends SQLiteOpenHelper {
     static final String name = "name";
     static final String dtstart = "dtstart";
     static final String dtend = "dtend";
-//    static final String dataStart = sdf.format(new Date());
-//    static final String dataEnd = sdf.format(new Date());
+    static final String dataStart = sdf.format(new Date());
+    static final String dataEnd = sdf.format(new Date());
     static final String description = "description";
     static final String attachment = "attachment";
-
-
 
 
     CalendarDB(Context context){
@@ -39,7 +37,7 @@ class CalendarDB extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL("create table mycalendar"
+        db.execSQL("create table" + mycalendar
                 + "(_id integer primary key, dtstart text, dtend text, name text, description text)");
 
     }
