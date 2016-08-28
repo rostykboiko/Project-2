@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+    defaultConfig {
+        applicationId "com.example.rostykboiko.todoapp"
+        minSdkVersion 21
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+
+
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+configurations.all {
+    resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Custom Mike Penz Drawer
+    compile('com.mikepenz:materialdrawer:5.3.6@aar') {
+        transitive = true
+    }
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+
+// Dependency for Google Sign-In
+    compile 'com.google.android.gms:play-services:9.4.0'
+
+    androidTestCompile 'com.android.support:support-annotations:24.2.0'
+
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+    // UiAutomatorTesting
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+
+    // Mike Penz
+    compile 'com.mikepenz:google-material-typeface:2.2.0.1@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.4.0.1@aar'
+    compile 'com.mikepenz:octicons-typeface:3.0.0.1@aar'
+    compile 'com.mikepenz:crossfadedrawerlayout:0.3.4@aar'
+    compile 'com.mikepenz:itemanimators:0.2.4@aar'
+
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
+
+    // Google Support
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+    compile 'com.android.support:cardview-v7:24.2.0'
+    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:24.2.0'
+
+    compile 'pub.devrel:easypermissions:0.1.5'
+    compile('com.google.api-client:google-api-client-android:1.22.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    compile('com.google.apis:google-api-services-calendar:v3-rev202-1.22.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+}
+
+apply plugin: 'com.google.gms.google-services'

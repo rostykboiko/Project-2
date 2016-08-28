@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "964105172041",
+    "project_id": "todoapp-8fbeb"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964105172041:android:64070cfa436fd416",
+        "android_client_info": {
+          "package_name": "com.example.rostykboiko.todoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964105172041-f9d0eq4lglq1po7u28j115usdeknmgcp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rostykboiko.todoapp",
+            "certificate_hash": "264BB283585487AC404EE8592E12BE00770D5DEA"
+          }
+        },
+        {
+          "client_id": "964105172041-ulhhat94696jjoodeuq1cr9dhjjgr02f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpHLjUy8JChNnaaembSC69fCP_6ePE1mE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

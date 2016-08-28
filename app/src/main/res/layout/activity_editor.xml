@@ -1,0 +1,232 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
+    app:popupTheme="@style/AppTheme"
+    android:background="@color/white"
+    android:windowSoftInputMode="stateVisible"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.PopupOverlay"
+        android:background="@color/background"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:theme="@style/ToolBarStyle"
+            app:popupTheme="@style/AppTheme_Dialog"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/backBtn"
+                android:src="@drawable/ic_arrow_left"
+                />
+            <EditText
+                android:id="@+id/txtname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:inputType="textAutoCorrect"
+                android:hint="@string/name_of_event"
+                android:maxLength="20"
+                android:textColor="@color/white"
+                android:background="@android:color/transparent"
+                android:layout_alignParentStart="true"
+                />
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="60dp"
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        >
+
+        <!--Date-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_material_clock"
+            />
+        <TextView
+            android:id="@+id/txtHoleDayOption"
+            android:text="@string/hole_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginEnd="16dp" />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txtHoleDayOption"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/switch2"
+            android:splitTrack="true"
+            />
+
+        <TextView
+            android:id="@+id/txtDateStart"
+            android:text="@string/dateEventStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginEnd="16dp"
+            android:layout_below="@+id/txtHoleDayOption"/>
+
+        <TextView
+            android:id="@+id/txtDateEnd"
+            android:text="@string/dateEventEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginEnd="16dp"
+            android:layout_below="@+id/txtDateStart"
+            />
+
+        <!--Time-->
+        <TextView
+            android:id="@+id/txtTimeStart"
+            android:text="@string/timeEventStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+
+            android:layout_alignBaseline="@+id/txtDateStart"
+            android:layout_alignBottom="@+id/txtDateStart"
+            />
+
+        <TextView
+            android:id="@+id/txtTimeEnd"
+            android:text="@string/timeEventEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+
+            android:layout_alignBaseline="@+id/txtDateEnd"
+            android:layout_alignBottom="@+id/txtDateEnd" />
+
+        <!--Divider-->
+        <View
+            android:layout_width="match_parent"
+            android:id="@+id/action_divider"
+            android:layout_height="0.5dp"
+            android:background="@color/iron"
+            android:layout_below="@+id/txtDateEnd"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
+
+        <!--Options-->
+        <ImageView
+            android:id="@+id/ic_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+
+            android:src="@drawable/ic_material_message"
+            android:layout_below="@+id/action_divider"
+            />
+
+        <EditText
+            android:id="@+id/txtDescription"
+            android:layout_width="200dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoCorrect|textMultiLine"
+            android:maxLength="150"
+            android:hint="@string/description"
+            android:textColor="?android:attr/textColor"
+            android:background="@android:color/transparent"
+            android:layout_below="@+id/action_divider"
+           />
+        <!--Divider-->
+        <View
+            android:layout_width="match_parent"
+            android:id="@+id/action_divider1"
+            android:layout_height="0.5dp"
+            android:background="@color/iron"
+            android:layout_below="@+id/txtDescription"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
+        <!--Group-->
+        <ImageView
+            android:id="@+id/ic_group"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="16dp"
+
+            android:src="@drawable/ic_material_account"
+            android:layout_below="@+id/action_divider1"
+            />
+
+        <TextView
+            android:id="@+id/txtGroup"
+            android:text="Group"
+            android:textColor="@color/monsoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+
+            android:layout_alignBottom="@+id/ic_group"
+            android:layout_alignStart="@+id/txtDescription" />
+
+        <!--Divider-->
+        <View
+            android:layout_width="match_parent"
+            android:id="@+id/action_divider2"
+            android:layout_height="0.5dp"
+            android:background="@color/iron"
+            android:layout_below="@+id/txtGroup"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
+        <!--File-->
+        <ImageView
+            android:id="@+id/ic_file"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="16dp"
+
+            android:src="@drawable/ic_material_drive"
+            android:layout_below="@+id/action_divider2"
+            />
+
+        <TextView
+            android:id="@+id/txtFile"
+            android:text="Add File"
+            android:textColor="@color/monsoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+
+            android:layout_alignBottom="@+id/ic_file"
+            android:layout_alignStart="@+id/txtGroup" />
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

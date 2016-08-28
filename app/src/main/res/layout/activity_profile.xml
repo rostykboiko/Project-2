@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.rostykboiko.todoapp.ProfileActivity">
+
+    <include layout="@layout/toolbar"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:foregroundGravity="center"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="16dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/userName"
+        android:layout_below="@id/imageView"
+        android:gravity="start"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:paddingLeft="16dp"
+        android:id="@+id/userEmail"
+        android:layout_below="@+id/userName"
+        android:layout_alignStart="@+id/userName" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:paddingLeft="16dp"
+        android:id="@+id/userID"
+        android:layout_below="@+id/userEmail"
+        android:layout_alignStart="@+id/userEmail" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:paddingLeft="16dp"
+        android:id="@+id/photoUri"
+        android:layout_below="@+id/userID"
+        android:layout_alignStart="@+id/userID" />
+
+
+</RelativeLayout>
