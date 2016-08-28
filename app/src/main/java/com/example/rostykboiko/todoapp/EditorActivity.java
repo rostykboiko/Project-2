@@ -93,7 +93,7 @@ public class EditorActivity extends AppCompatActivity {
 
     private void dateInit(int day,int dayOfWeek, int month, int year){
         // DateFormat : Ср,10 серпень 2016
-       // DateAdapter.dayOfWeekString(this, dayOfWeek);
+
         eventDateStartTxt.setText(DateAdapter.dayOfWeekString(this, dayOfWeek) + "," + day + " " + DateAdapter.monthOfYear(this, month) + " " + year);
         eventDateEndTxt.setText(DateAdapter.dayOfWeekString(this, dayOfWeek) + "," + day + " " + DateAdapter.monthOfYear(this, month) + " " + year);
 
