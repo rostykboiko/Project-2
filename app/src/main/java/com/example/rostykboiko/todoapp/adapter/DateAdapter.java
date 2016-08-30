@@ -39,5 +39,18 @@ public class DateAdapter {
         return dayOfWeekTitle;
     }
 
+    public static String getTimeFromDateTime(String dateTime){
+        /** DateTime Format yyyy-MM-ddThh:mm:ss.sss **/
+        String time = "00:00"; // 24h Format
+        String[] separated = dateTime.split("T");
+        time = separated[1];
+        separated = time.split(":");
+        time = separated[0] + ":" + separated[1];
+        return time;
+    }
 
+    public static String getHourFromDeteTime(String dateTime){
+        String hour = "";
+        return hour;
+    }
 }

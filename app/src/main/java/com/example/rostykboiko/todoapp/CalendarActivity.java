@@ -1,5 +1,6 @@
 package com.example.rostykboiko.todoapp;
 
+import com.example.rostykboiko.todoapp.adapter.DateAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -378,13 +379,10 @@ public class CalendarActivity extends Activity
 
                 mydb.insertNotes(
                         event.getSummary(),
-                        event.getStart().getDateTime().toString(),
-                        event.getEnd().getDateTime().toString(),
+                        String.format("%s", DateAdapter.getTimeFromDateTime(event.getStart().getDateTime().toString())),
+                        String.format("%s", DateAdapter.getTimeFromDateTime(event.getEnd().getDateTime().toString())),
                         event.getDescription(),
                         "");
-
-                eventStrings.add(String.format("%s", event.getEnd().toString()));
-
             }
             return eventStrings;
         }

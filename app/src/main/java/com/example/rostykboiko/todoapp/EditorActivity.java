@@ -83,7 +83,7 @@ public class EditorActivity extends AppCompatActivity {
                 name.setText(rs.getString(rs.getColumnIndex(CalendarDB.name)));
                 content.setText(rs.getString(rs.getColumnIndex(CalendarDB.description)));
                 eventTimeStartTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dataStart)));
-                eventTimeEndTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dtend)));
+                eventTimeEndTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dataEnd)));
                 if (!rs.isClosed()) {
                     rs.close();
                 }
