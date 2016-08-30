@@ -128,7 +128,6 @@ public class EditorActivity extends AppCompatActivity {
                     mDatePicker = new DatePickerDialog(EditorActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
                             Date date = new Date(year, month, day-1);
                             String dayOfWeek = simpledateformat.format(date);
 

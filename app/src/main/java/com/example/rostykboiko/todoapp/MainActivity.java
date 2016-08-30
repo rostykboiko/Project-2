@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements
                                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                                     @Override
                                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                                      //  result.closeDrawer();
+                                  mDrawer.closeDrawer();
 //                                Intent intent = new Intent(MainActivity.this, Activity.class);
 //                                startActivity(intent);
                                         return false;
@@ -321,16 +321,6 @@ public class MainActivity extends AppCompatActivity implements
                                         return false;
                                     }
                                 }),
-                        new SecondaryDrawerItem()
-                                .withName("Sign In")
-                                .withIcon(R.drawable.ic_material_accsircle)
-                                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                                    @Override
-                                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                                        mDrawer.closeDrawer();
-                                        signIn();
-                                        return false;
-                                    }}),
                         new SectionDrawerItem()
                                 .withName("Groups"),
                         new PrimaryDrawerItem()
@@ -375,7 +365,8 @@ public class MainActivity extends AppCompatActivity implements
                                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                                     @Override
                                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-
+                                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                                startActivity(intent);
                                         return false;
                                     }
                                 })
