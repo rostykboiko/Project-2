@@ -82,8 +82,8 @@ public class EditorActivity extends AppCompatActivity {
                 rs.moveToFirst();
                 name.setText(rs.getString(rs.getColumnIndex(CalendarDB.name)));
                 content.setText(rs.getString(rs.getColumnIndex(CalendarDB.description)));
-                eventTimeStartTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dataStart)));
-                eventTimeEndTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.dataEnd)));
+                eventTimeStartTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.timeStart)));
+                eventTimeEndTxt.setText(rs.getString(rs.getColumnIndex(CalendarDB.timeEnd)));
                 if (!rs.isClosed()) {
                     rs.close();
                 }
@@ -245,7 +245,7 @@ public class EditorActivity extends AppCompatActivity {
                             toast.show();
                         } else {
                             if (mydb.updateNotes(id_To_Update, name.getText().toString(),
-                                    timeStringStart, timeStringEnd, content.getText().toString(), ""))
+                                    timeStringStart, timeStringEnd,"", "", content.getText().toString(), ""))
                             {
                                 toast = Toast.makeText(getApplicationContext(), "Your note Updated Successfully!", Toast.LENGTH_LONG);
                                 toast.show();
@@ -256,7 +256,7 @@ public class EditorActivity extends AppCompatActivity {
                             }
                         }
                     } else {
-                            if (mydb.insertNotes(name.getText().toString(),timeStringStart, timeStringEnd,
+                            if (mydb.insertNotes(name.getText().toString(),timeStringStart, timeStringEnd, "","",
                                     content.getText().toString(), "")) {
                                 toast = Toast.makeText(getApplicationContext(), "Added Successfully.", Toast.LENGTH_LONG);
                                 toast.show();

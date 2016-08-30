@@ -49,8 +49,18 @@ public class DateAdapter {
         return time;
     }
 
-    public static String getHourFromDeteTime(String dateTime){
-        String hour = "";
-        return hour;
+    public static String getDateFromDateTime(String dateTime){
+        /** Date Format: DayName #Day Month Year **/
+        String date = "31-12-2016";
+        String day, month, year;
+        String[] separated = dateTime.split("-");
+        year = separated[0];
+        month = separated[1];
+        day = separated[2];
+        separated = day.split("T");
+        day = separated[0];
+        date = day + "-" + month + "-" + year;
+        return date;
     }
+
 }

@@ -379,10 +379,23 @@ public class CalendarActivity extends Activity
 
                 mydb.insertNotes(
                         event.getSummary(),
-                        String.format("%s", DateAdapter.getTimeFromDateTime(event.getStart().getDateTime().toString())),
-                        String.format("%s", DateAdapter.getTimeFromDateTime(event.getEnd().getDateTime().toString())),
+                        String.format("%s",
+                                DateAdapter.getTimeFromDateTime(event.getStart().getDateTime().toString())),
+                        String.format("%s",
+                                DateAdapter.getTimeFromDateTime(event.getEnd().getDateTime().toString())),
+                        String.format("%s",
+                                DateAdapter.getDateFromDateTime(event.getStart().getDateTime().toString())),
+                        String.format("%s",
+                                DateAdapter.getDateFromDateTime(event.getEnd().getDateTime().toString())),
                         event.getDescription(),
                         "");
+
+                eventStrings.add(
+                        String.format("%s",
+                                DateAdapter.getDateFromDateTime(event.getStart().getDateTime().toString())));
+
+//                eventStrings.add(
+//                        String.format("%s ", event.getStart().getDateTime()));
             }
             return eventStrings;
         }

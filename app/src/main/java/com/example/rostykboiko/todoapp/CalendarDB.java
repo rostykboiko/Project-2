@@ -15,14 +15,14 @@ import java.util.HashMap;
 class CalendarDB extends SQLiteOpenHelper {
     private SQLiteDatabase db;
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sss'Z'");
-
     private static final String mycalendar = "mycalendar";
-    private static final String dbname = "cal2.db";
+    private static final String dbname = "cal3.db";
     static final String _id = "_id";
-    static final String name = "name";;
-    static final String dataStart = "dataStart";
-    static final String dataEnd = "dataEnd";
+    static final String name = "name";
+    static final String timeStart = "timeStart";
+    static final String dateStart = "dateStart";
+    static final String timeEnd = "timeEnd";
+    static final String dateEnd = "dateEnd";
     static final String description = "description";
     static final String attachment = "attachment";
 
@@ -35,7 +35,7 @@ class CalendarDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
         db.execSQL("create table " + mycalendar
-                + "(_id integer primary key, dataStart text, dataEnd text, name text, description text, attachment text)");
+                + "(_id integer primary key, timeStart text, timeEnd text, dateStart text, dateEnd text, name text, description text, attachment text)");
 
     }
 
@@ -49,19 +49,21 @@ class CalendarDB extends SQLiteOpenHelper {
     Cursor fetchAll() {
         db = this.getReadableDatabase();
         Cursor mCursor = db.query(mycalendar, new String[]
-                { "_id", "dataStart", "dataEnd", "name", "description", "attachment" }
+                { "_id", "timeStart", "timeEnd", "dateStart", "dateEnd", "name", "description", "attachment" }
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor;
     }
-    boolean insertNotes(String name, String dataStart, String dataEnd, String description, String attachment) {
+    boolean insertNotes(String name, String timeStart, String timeEnd, String dateStart, String dateEnd, String description, String attachment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
-        contentValues.put("dataStart", dataStart);
-        contentValues.put("dataEnd", dataEnd);
+        contentValues.put("timeStart", timeStart);
+        contentValues.put("dateStart", dateStart);
+        contentValues.put("timeEnd", timeEnd);
+        contentValues.put("dateEnd", dateEnd);
         contentValues.put("description", description);
         contentValues.put("attachment", attachment);
         db.insert(mycalendar, null, contentValues);
@@ -79,12 +81,14 @@ class CalendarDB extends SQLiteOpenHelper {
         int numRows = (int) DatabaseUtils.queryNumEntries(db, mycalendar);
         return numRows;
     }
-    boolean updateNotes(Integer id, String name, String dataStart, String dataEnd, String description, String attachment) {
+    boolean updateNotes(Integer id, String name, String timeStart, String timeEnd, String dateStart, String dateEnd, String description, String attachment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
-        contentValues.put("dataStart", dataStart);
-        contentValues.put("dataEnd", dataEnd);
+        contentValues.put("timeStart", timeStart);
+        contentValues.put("dateStart", dateStart);
+        contentValues.put("timeEnd", timeEnd);
+        contentValues.put("dateEnd", dateEnd);
         contentValues.put("description", description);
         contentValues.put("attachment", attachment);
         db.update(mycalendar, contentValues, "_id = ? ",
@@ -105,8 +109,10 @@ class CalendarDB extends SQLiteOpenHelper {
         while (!res.isAfterLast()) {
             array_list.add(res.getString(res.getColumnIndex("_id")));
             array_list.add(res.getString(res.getColumnIndex(name)));
-            array_list.add(res.getString(res.getColumnIndex(dataStart)));
-            array_list.add(res.getString(res.getColumnIndex(dataEnd)));
+            array_list.add(res.getString(res.getColumnIndex(timeStart)));
+            array_list.add(res.getString(res.getColumnIndex(dateStart)));
+            array_list.add(res.getString(res.getColumnIndex(timeEnd)));
+            array_list.add(res.getString(res.getColumnIndex(dateEnd)));
             array_list.add(res.getString(res.getColumnIndex(description)));
             array_list.add(res.getString(res.getColumnIndex(attachment)));
 

@@ -424,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
         String[] fieldNames = new String[]{CalendarDB.name, CalendarDB._id,
-                CalendarDB.dataStart, CalendarDB.description};
+                CalendarDB.timeStart, CalendarDB.description};
         int[] display = new int[]{R.id.txtNameRow, R.id.txtIDrow,
                 R.id.txtTimeRow, R.id.txtDescription};
 
