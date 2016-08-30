@@ -429,4 +429,14 @@ public class CalendarActivity extends Activity
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(
+                getApplicationContext(),
+                MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

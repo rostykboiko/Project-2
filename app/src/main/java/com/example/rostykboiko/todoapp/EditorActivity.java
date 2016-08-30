@@ -233,8 +233,6 @@ public class EditorActivity extends AppCompatActivity {
                 d.setTitle("Are you sure");
                 d.show();
                 return true;
-            // TODO Переписати збереження
-            // TODO з пустими полями
             // TODO Увесь день(дія) - з датою тільки початку
             case R.id.Save:
                 Bundle extras = getIntent().getExtras();
@@ -243,9 +241,8 @@ public class EditorActivity extends AppCompatActivity {
                 if (extras != null) {
                     int Value = extras.getInt("id");
                     if (Value > 0) {
-                        if (content.getText().toString().trim().equals("")
-                                || name.getText().toString().trim().equals("")) {
-                            toast = Toast.makeText(getApplicationContext(),  "Please fill in name of the note", Toast.LENGTH_LONG);
+                        if ( name.getText().toString().trim().equals("")) {
+                            toast = Toast.makeText(getApplicationContext(),  "Please set title of event", Toast.LENGTH_LONG);
                             toast.show();
                         } else {
                             if (mydb.updateNotes(id_To_Update, name.getText().toString(),
@@ -260,11 +257,6 @@ public class EditorActivity extends AppCompatActivity {
                             }
                         }
                     } else {
-                        if (content.getText().toString().trim().equals("")
-                                || name.getText().toString().trim().equals("")) {
-                            toast = Toast.makeText(getApplicationContext(), "Please fill in name of the note", Toast.LENGTH_LONG);
-                            toast.show();
-                        } else {
                             if (mydb.insertNotes(name.getText().toString(),timeStringStart, timeStringEnd,
                                     content.getText().toString(), "")) {
                                 toast = Toast.makeText(getApplicationContext(), "Added Successfully.", Toast.LENGTH_LONG);
@@ -277,7 +269,6 @@ public class EditorActivity extends AppCompatActivity {
                             }
                         }
                     }
-                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -70,23 +71,18 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener {
 
-    GoogleAccountCredential mCredential;
+
     private Menu menu;
     public Toolbar toolbar;
     private ImageView drawerButton;
     private ProgressDialog mProgressDialog;
     private GoogleApiClient mGoogleApiClient;
-
+    GoogleAccountCredential mCredential;
     private Date date = new Date();
     private Drawer mDrawer = null;
 
     private static final String TAG = "SignIn";
     private static final int RC_SIGN_IN = 9001;
-
-    static final int REQUEST_ACCOUNT_PICKER = 1000;
-    static final int REQUEST_AUTHORIZATION = 1001;
-    static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
-    static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
 
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = {CalendarScopes.CALENDAR};
@@ -120,20 +116,15 @@ public class MainActivity extends AppCompatActivity implements
                 .setBackOff(new ExponentialBackOff());
 
 
-
-
         initNavDrawer();
-        initCoordinationLayout();
+       initCoordinationLayout();
     }
 
-    private void googleSignIn(){
 
-    }
-
+    /** Google SignIn Start **/
     @Override
     public void onStart() {
         super.onStart();
-
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
         if (opr.isDone()) {
             GoogleSignInResult result = opr.get();
@@ -188,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void signIn() {
-        googleSignIn();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -223,6 +213,8 @@ public class MainActivity extends AppCompatActivity implements
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
+    /** Google SignIn End **/
+
     private AccountHeader initNawDrawerHeader() {
         //          Image Download
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
@@ -255,10 +247,13 @@ public class MainActivity extends AppCompatActivity implements
                 return super.placeholder(ctx, tag);
             }
         });
+
         AccountHeader mHeader = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withCompactStyle(true)
+                .withTextColorRes(R.color.black)
                 .withHeaderBackground(R.drawable.header)
+
                 .addProfiles(
                         new ProfileDrawerItem()
                                 .withName(GoogleAuth.getUserName())
@@ -350,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements
                                     }
                                 }),
                         new PrimaryDrawerItem()
-                                .withName("Add new Item")
+                                .withName("Add new group")
                                 .withIcon(R.drawable.ic_material_addgroup)
                                 .withOnDrawerItemClickListener
                                         (new Drawer.OnDrawerItemClickListener() {
@@ -469,35 +464,6 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private String setDate() {
-        int todaysday = date.getDay();
-        int todaysdate = date.getDate();
-        String dateString = "";
-
-        if (todaysday == 1) {
-            dateString = todaysdate + ", " + getText(R.string.monday);
-        }
-        if (todaysday == 2) {
-            dateString = todaysdate + ", " + getText(R.string.tuesday);
-        }
-        if (todaysday == 3) {
-            dateString = todaysdate + ", " + getText(R.string.wednesday);
-        }
-        if (todaysday == 4) {
-            dateString = todaysdate + ", " + getText(R.string.thursday);
-        }
-        if (todaysday == 5) {
-            dateString = todaysdate + ", " + getText(R.string.friday);
-        }
-        if (todaysday == 6) {
-            dateString = todaysdate + ", " + getText(R.string.saturday);
-        }
-        if (todaysday == 7) {
-            dateString = todaysdate + ", " + getText(R.string.sunday);
-        }
-        return dateString;
-    }
-
 
     private final View.OnClickListener Global_OnClickListener = new View.OnClickListener() {
         public void onClick(final View v) {
@@ -506,80 +472,4 @@ public class MainActivity extends AppCompatActivity implements
         }
     };
 
-
-    /**
-     * Google Calendar Sync Start
-     **/
-    @AfterPermissionGranted(REQUEST_PERMISSION_GET_ACCOUNTS)
-    private void chooseAccount() {
-        if (EasyPermissions.hasPermissions(
-                this, android.Manifest.permission.GET_ACCOUNTS)) {
-            String accountName = getPreferences(Context.MODE_PRIVATE)
-                    .getString(PREF_ACCOUNT_NAME, null);
-            if (accountName != null) {
-                mCredential.setSelectedAccountName(accountName);
-                getResultsFromApi();
-            } else {
-                // Start a dialog from which the user can choose an account
-                startActivityForResult(
-                        mCredential.newChooseAccountIntent(),
-                        REQUEST_ACCOUNT_PICKER);
-            }
-        } else {
-            // Request the GET_ACCOUNTS permission via a user dialog
-            EasyPermissions.requestPermissions(
-                    this,
-                    "This app needs to access your Google account (via Contacts).",
-                    REQUEST_PERMISSION_GET_ACCOUNTS,
-                    android.Manifest.permission.GET_ACCOUNTS);
-        }
-    }
-
-    private void getResultsFromApi() {
-        if (!isGooglePlayServicesAvailable()) {
-            acquireGooglePlayServices();
-        } else if (mCredential.getSelectedAccountName() == null) {
-            chooseAccount();
-        } else if (!isDeviceOnline()) {
-            Toast.makeText(MainActivity.this, "No network connection available.", Toast.LENGTH_SHORT).show();
-        } else {
-            new MakeRequestTask(mCredential).execute();
-        }
-    }
-
-    private void acquireGooglePlayServices() {
-        GoogleApiAvailability apiAvailability =
-                GoogleApiAvailability.getInstance();
-        final int connectionStatusCode =
-                apiAvailability.isGooglePlayServicesAvailable(this);
-        if (apiAvailability.isUserResolvableError(connectionStatusCode)) {
-            showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
-        }
-    }
-
-    private boolean isGooglePlayServicesAvailable() {
-        GoogleApiAvailability apiAvailability =
-                GoogleApiAvailability.getInstance();
-        final int connectionStatusCode =
-                apiAvailability.isGooglePlayServicesAvailable(this);
-        return connectionStatusCode == ConnectionResult.SUCCESS;
-    }
-
-    void showGooglePlayServicesAvailabilityErrorDialog(
-            final int connectionStatusCode) {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        Dialog dialog = apiAvailability.getErrorDialog(
-                MainActivity.this,
-                connectionStatusCode,
-                REQUEST_GOOGLE_PLAY_SERVICES);
-        dialog.show();
-    }
-
-    private boolean isDeviceOnline() {
-        ConnectivityManager connMgr =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected());
-    }
-    /** Google Calendar Sync End**/
 }

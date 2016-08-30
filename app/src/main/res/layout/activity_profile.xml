@@ -35,24 +35,43 @@
                 android:layout_marginStart="0dp"
                 android:scaleType="fitStart" />
             <TextView
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="180dp"
+                android:layout_marginTop="200dp"
                 android:layout_marginStart="32dp"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                android:id="@+id/userName"
                 android:textColor="@color/white"
                 android:gravity="start"
-                android:layout_marginTop="16dp" />
+             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_email_string"
+                android:id="@+id/userEmail"
+                android:layout_marginTop="242dp"
+                android:layout_marginStart="32dp"
+                android:gravity="start"
+                android:textColor="@color/white"
+                android:layout_below="@+id/userName"
+                android:layout_alignStart="@+id/userName" />
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="24dp"
                 app:layout_collapseMode="pin"
                 app:titleTextColor="@color/white"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/backBtn"
+                    android:src="@drawable/ic_arrow_left"
+                    />
 
             </android.support.v7.widget.Toolbar>
 
@@ -61,32 +80,28 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medium Text"
-        android:paddingLeft="16dp"
-        android:id="@+id/userEmail"
-        android:layout_below="@+id/appbar"
-        android:layout_alignStart="@+id/appbar" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medium Text"
-        android:paddingLeft="16dp"
-        android:id="@+id/userID"
-        android:layout_below="@+id/userEmail"
-        android:layout_alignStart="@+id/userEmail" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Medium Text"
-        android:paddingLeft="16dp"
-        android:id="@+id/photoUri"
-        android:layout_below="@+id/userID"
-        android:layout_alignStart="@+id/userID" />
 
 
+    <Button
+        android:text="@string/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_in_button"
+        android:gravity="bottom"
+
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_out_button"
+        android:gravity="bottom"
+
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/sign_in_button" />
 
 </RelativeLayout>
